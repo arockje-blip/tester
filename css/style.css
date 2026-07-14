@@ -1,0 +1,25 @@
+/* ══════════════════════════════════════════════════
+   BASE STYLES — admin.html
+   Deliberately does NOT set overflow:hidden on html/body
+   (unlike game.html's canvas view) so that admin content
+   — including the Phase 2 live tournament dashboard — can
+   grow taller than the viewport and scroll normally.
+   ══════════════════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #0a0a0a;
+  font-family: 'Arial', sans-serif;
+  color: #e9f2ff;
+}
+
+a { color: inherit; text-decoration: none; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #2f4064; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #3d5480; }

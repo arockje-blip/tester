@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — 8 Ball Pool Clan Quest</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ── LOGIN ── */
+  #admin-login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0a0a0a;padding:24px 0;}
+  #admin-login-box{width:min(360px,90vw);background:linear-gradient(145deg,#10172a,#0b0f1a);border:1px solid #2f4064;border-radius:16px;padding:22px;}
+  #admin-login-box h1{font-size:.85rem;letter-spacing:.14em;color:#8fb4ff;text-transform:uppercase;margin-bottom:16px;text-align:center;}
+  #admin-login-box input{width:100%;border:1px solid #334869;background:#0e1728;color:#fff;border-radius:9px;padding:10px 12px;font-size:.9rem;margin-bottom:10px;}
+  #admin-login-box button{width:100%;border:none;border-radius:8px;padding:10px;font-weight:bold;background:#7fb3ff;color:#041225;cursor:pointer;}
+  #admin-err{min-height:18px;font-size:.75rem;color:#ff8888;text-align:center;margin-top:6px;}
+
+  /* ── DASHBOARD (Clan Leaderboard Portal) ──
+     Light, high-contrast text throughout so numbers/labels
+     are clearly readable against the dark background. */
+  #dashboard-placeholder{display:none;min-height:100vh;height:auto;padding:24px;}
+  #adminbox{
+    width:min(1000px,95vw);margin:0 auto;
+    background:linear-gradient(145deg,#0f1728,#0a101c);
+    border:1px solid #314664;border-radius:16px;padding:20px;
+  }
+  #admin-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+  #admin-title{font-size:.95rem;color:#9ec4ff;letter-spacing:.14em;text-transform:uppercase;font-weight:bold;}
+  #admin-signout{background:#33435e;color:#f2f7ff;border:none;border-radius:8px;padding:9px 14px;cursor:pointer;font-weight:bold;font-size:.8rem;}
+  #admin-signout:hover{background:#44577a;}
+
+  #admin-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:16px;}
+  .admin-card{background:#121d33;border:1px solid #2f4464;border-radius:10px;padding:12px;}
+  .admin-label{font-size:.65rem;color:#a9c3e8;letter-spacing:.08em;text-transform:uppercase;}
+  .admin-val{font-size:1.15rem;color:#ffffff;font-weight:bold;margin-top:4px;}
+
+  #admin-table{width:100%;border-collapse:collapse;font-size:.85rem;}
+  #admin-table th,#admin-table td{border-bottom:1px solid #25354f;padding:10px 8px;text-align:left;color:#e9f2ff;}
+  #admin-table th{color:#9ec4ff;font-weight:bold;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;}
+  #admin-table td{color:#f0f5ff;}
+  #admin-table tbody tr:hover{background:rgba(127,179,255,.06);}
+  .clan-cell{display:flex;align-items:center;gap:10px;}
+  .clan-logo{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1.5px solid #2f4464;flex-shrink:0;}
+  .clan-name{font-weight:bold;color:#ffffff;}
+
+  #admin-empty{color:#a9c3e8;font-size:.8rem;text-align:center;padding:18px 0;}
+  #admin-footnote{margin-top:14px;font-size:.72rem;color:#8ba3c5;line-height:1.5;}
+
+  @media (max-width:800px){
+    #admin-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    #admin-table{font-size:.75rem;}
+  }
+</style>
+</head>
+<body>
+
+<div id="admin-login-wrap">
+  <div id="admin-login-box">
+    <h1>Admin Access</h1>
+    <input id="admin-user" type="text" placeholder="Username" autocomplete="off" />
+    <input id="admin-pass" type="password" placeholder="Password" autocomplete="off" />
+    <button id="admin-login-btn">Sign In</button>
+    <div id="admin-err"></div>
+  </div>
+</div>
+
+<div id="dashboard-placeholder">
+  <div id="adminbox">
+    <div id="admin-head">
+      <div id="admin-title">Clan Leaderboard Portal</div>
+      <button id="admin-signout">Sign Out</button>
+    </div>
+
+    <div id="admin-grid">
+      <div class="admin-card"><div class="admin-label">Total Games</div><div class="admin-val" id="admin-total-games">0</div></div>
+      <div class="admin-card"><div class="admin-label">Total Wins Recorded</div><div class="admin-val" id="admin-total-wins">0</div></div>
+      <div class="admin-card"><div class="admin-label">Total Balls Pooled</div><div class="admin-val" id="admin-total-pooled">0</div></div>
+      <div class="admin-card"><div class="admin-label">Leading Clan</div><div class="admin-val" id="admin-leading-clan">-</div></div>
+    </div>
+
+    <table id="admin-table">
+      <thead>
+        <tr>
+          <th>Clan</th>
+          <th>Games</th>
+          <th>Wins</th>
+          <th>Losses</th>
+          <th>Player Pooled</th>
+          <th>CPU Pooled</th>
+          <th>Total Pooled</th>
+        </tr>
+      </thead>
+      <tbody id="admin-body"></tbody>
+    </table>
+    <div id="admin-empty" style="display:none;">No match data yet — stats will appear here as players finish matches.</div>
+
+    <div id="admin-footnote">
+      Live view of the shared clan leaderboard. Updates automatically when a match finishes on this device, and refreshes if another tab writes new stats.
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>
